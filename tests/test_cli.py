@@ -12,6 +12,7 @@ from commitizen.exceptions import (
     NoCommandFoundError,
     NotAGitProjectError,
     InvalidCommandArgumentError,
+    InvalidConfigurationError,
 )
 
 
@@ -172,3 +173,11 @@ def test_unknown_args_before_double_dash_raises(mocker: MockFixture):
     assert "Invalid commitizen arguments were found before -- separator" in str(
         excinfo.value
     )
+
+
+@pytest.mark.czplus
+def test_pass_custom_config(mocker: MockFixture):
+    test_args = ["cz", "-cf", "file.toml", "example"]
+    mocker.patch.object(sys, "argv", test_args)
+    with pytest.raises(InvalidConfigurationError, match="File file.toml not exists."):
+        cli.main()

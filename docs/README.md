@@ -100,7 +100,7 @@ Read more in the section [Getting Started](./getting_started.md).
 
 ```sh
 $ czp --help
-usage: czp [-h] [--debug] [-n NAME] [-nr NO_RAISE] {init,commit,c,ls,example,info,schema,bump,changelog,ch,check,version} ...
+usage: czp [-h] [--debug] [-n NAME] [-cf CONFIG_FILE] [-nr NO_RAISE] {init,commit,c,ls,example,info,schema,bump,changelog,ch,check,version} ...
 
 Commitizen is a cli tool to generate conventional commits.
 For more information about the topic go to https://conventionalcommits.org/
@@ -109,6 +109,8 @@ optional arguments:
   -h, --help            show this help message and exit
   --debug               use debug mode
   -n NAME, --name NAME  use the given commitizen (default: cz_conventional_commits)
+  -cf CONFIG_FILE, --config-file CONFIG_FILE
+                        configuration file path
   -nr NO_RAISE, --no-raise NO_RAISE
                         comma separated error codes that won't rise error, e.g: czp -nr 1,2,3 bump. See codes at https://commitizen-
                         tools.github.io/commitizen/exit_codes/

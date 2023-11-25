@@ -217,3 +217,35 @@ class TestYamlConfig:
 
         with pytest.raises(InvalidConfigurationError, match=r"\.cz\.yaml"):
             config.YAMLConfig(data=existing_content, path=path)
+
+
+@pytest.mark.czplus
+class TestCustomFileConfig:
+    @pytest.fixture
+    def empty_files_manager(self, request, tmpdir):
+        with tmpdir.as_cwd():
+            with open(request.param, "w", encoding="utf-8") as f:
+                f.write("")
+            yield
+
+    def test_custom_file_not_exist(self):
+        with pytest.raises(InvalidConfigurationError, match=".*not exists.*"):
+            config.read_cfg(cfg_path=Path("file.yaml"))
+
+    @pytest.mark.parametrize("empty_files_manager", ["file.toml"], indirect=True)
+    def test_custom_file_is_empty_config(self, empty_files_manager):
+        with pytest.raises(InvalidConfigurationError, match=".*Fill it.*"):
+            config.read_cfg(cfg_path=Path("file.toml"))
+
+    @pytest.mark.parametrize("empty_files_manager", ["file.txt"], indirect=True)
+    def test_load_config_from_file_incorrect_extension(self, empty_files_manager):
+        assert Path("file.txt").exists()
+        with pytest.raises(
+            InvalidConfigurationError, match=".*should have a valid extension.*"
+        ):
+            config._load_config_from_file(path=Path("file.txt"))
+
+    @pytest.mark.parametrize("config_files_manager", ["file.toml"], indirect=True)
+    def test_load_config_from_custom_file(self, config_files_manager):
+        cfg = config.read_cfg(cfg_path=Path("file.toml"))
+        assert cfg.settings == _settings

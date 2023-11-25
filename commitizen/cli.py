@@ -98,6 +98,10 @@ data = {
             "help": "use the given commitizen (default: cz_conventional_commits)",
         },
         {
+            "name": ["-cf", "--config-file"],
+            "help": "configuration file path",
+        },
+        {
             "name": ["-nr", "--no-raise"],
             "type": str,
             "required": False,
@@ -505,7 +509,6 @@ def parse_no_raise(comma_separated_no_raise: str) -> list[int]:
 
 
 def main():
-    conf = config.read_cfg()
     parser = cli(data)
 
     argcomplete.autocomplete(parser)
@@ -546,6 +549,11 @@ def main():
             )
         extra_args = " ".join(unknown_args[1:])
         arguments["extra_cli_args"] = extra_args
+
+    if args.config_file:
+        conf = config.read_cfg(cfg_path=Path(args.config_file))
+    else:
+        conf = config.read_cfg()
 
     if args.name:
         conf.update({"name": args.name})

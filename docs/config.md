@@ -1,5 +1,105 @@
 # Configuration
 
+## Configuration file
+
+### pyproject.toml or .cz.toml
+
+Default and recommended configuration format for a project.
+For a **python** project, we recommend adding an entry to your `pyproject.toml`.
+You can also create a `.cz.toml` file at the root of your project folder.
+
+Example configuration:
+
+```toml
+[tool.commitizen]
+name = "cz_conventional_commits"
+version = "0.1.0"
+version_files = [
+    "src/__version__.py",
+    "pyproject.toml:version"
+]
+update_changelog_on_bump = true
+style = [
+    ["qmark", "fg:#ff9d00 bold"],
+    ["question", "bold"],
+    ["answer", "fg:#ff9d00 bold"],
+    ["pointer", "fg:#ff9d00 bold"],
+    ["highlighted", "fg:#ff9d00 bold"],
+    ["selected", "fg:#cc5454"],
+    ["separator", "fg:#cc5454"],
+    ["instruction", ""],
+    ["text", ""],
+    ["disabled", "fg:#858585 italic"]
+]
+```
+
+### .cz.json or cz.json
+
+Commitizen has support for JSON configuration. Recommended for `NodeJS` projects.
+
+```json
+{
+  "commitizen": {
+    "name": "cz_conventional_commits",
+    "version": "0.1.0",
+    "version_files": ["src/__version__.py", "pyproject.toml:version"],
+    "style": [
+      ["qmark", "fg:#ff9d00 bold"],
+      ["question", "bold"],
+      ["answer", "fg:#ff9d00 bold"],
+      ["pointer", "fg:#ff9d00 bold"],
+      ["highlighted", "fg:#ff9d00 bold"],
+      ["selected", "fg:#cc5454"],
+      ["separator", "fg:#cc5454"],
+      ["instruction", ""],
+      ["text", ""],
+      ["disabled", "fg:#858585 italic"]
+    ]
+  }
+}
+```
+
+### .cz.yaml or cz.yaml
+
+YAML configuration is supported by Commitizen. Recommended for `Go`, `ansible`, or even `helm` charts projects.
+
+```yaml
+commitizen:
+  name: cz_conventional_commits
+  version: 0.1.0
+  version_files:
+    - src/__version__.py
+    - pyproject.toml:version
+  style:
+    - - qmark
+      - fg:#ff9d00 bold
+    - - question
+      - bold
+    - - answer
+      - fg:#ff9d00 bold
+    - - pointer
+      - fg:#ff9d00 bold
+    - - highlighted
+      - fg:#ff9d00 bold
+    - - selected
+      - fg:#cc5454
+    - - separator
+      - fg:#cc5454
+    - - instruction
+      - ""
+    - - text
+      - ""
+    - - disabled
+      - fg:#858585 italic
+```
+
+### Custom file path 
+
+It is possible to specify custom path to the config file by using `-cf`/`--config-file` argument.
+```cz -cf mics/cz.yaml```
+
+Note: file should have a valid extension (toml/json/yaml).
+
 ## Settings
 
 ### `name`
@@ -215,99 +315,6 @@ Type: `dict[str, Any]`
 Default: `{}`
 
 Provide extra variables to the changelog template. [Read more][template-customization]
-
-## Configuration file
-
-### pyproject.toml or .cz.toml
-
-Default and recommended configuration format for a project.
-For a **python** project, we recommend adding an entry to your `pyproject.toml`.
-You can also create a `.cz.toml` file at the root of your project folder.
-
-Example configuration:
-
-```toml
-[tool.commitizen]
-name = "cz_conventional_commits"
-version = "0.1.0"
-version_files = [
-    "src/__version__.py",
-    "pyproject.toml:version"
-]
-update_changelog_on_bump = true
-style = [
-    ["qmark", "fg:#ff9d00 bold"],
-    ["question", "bold"],
-    ["answer", "fg:#ff9d00 bold"],
-    ["pointer", "fg:#ff9d00 bold"],
-    ["highlighted", "fg:#ff9d00 bold"],
-    ["selected", "fg:#cc5454"],
-    ["separator", "fg:#cc5454"],
-    ["instruction", ""],
-    ["text", ""],
-    ["disabled", "fg:#858585 italic"]
-]
-```
-
-### .cz.json or cz.json
-
-Commitizen has support for JSON configuration. Recommended for `NodeJS` projects.
-
-```json
-{
-  "commitizen": {
-    "name": "cz_conventional_commits",
-    "version": "0.1.0",
-    "version_files": ["src/__version__.py", "pyproject.toml:version"],
-    "style": [
-      ["qmark", "fg:#ff9d00 bold"],
-      ["question", "bold"],
-      ["answer", "fg:#ff9d00 bold"],
-      ["pointer", "fg:#ff9d00 bold"],
-      ["highlighted", "fg:#ff9d00 bold"],
-      ["selected", "fg:#cc5454"],
-      ["separator", "fg:#cc5454"],
-      ["instruction", ""],
-      ["text", ""],
-      ["disabled", "fg:#858585 italic"]
-    ]
-  }
-}
-```
-
-### .cz.yaml or cz.yaml
-
-YAML configuration is supported by Commitizen. Recommended for `Go`, `ansible`, or even `helm` charts projects.
-
-```yaml
-commitizen:
-  name: cz_conventional_commits
-  version: 0.1.0
-  version_files:
-    - src/__version__.py
-    - pyproject.toml:version
-  style:
-    - - qmark
-      - fg:#ff9d00 bold
-    - - question
-      - bold
-    - - answer
-      - fg:#ff9d00 bold
-    - - pointer
-      - fg:#ff9d00 bold
-    - - highlighted
-      - fg:#ff9d00 bold
-    - - selected
-      - fg:#cc5454
-    - - separator
-      - fg:#cc5454
-    - - instruction
-      - ""
-    - - text
-      - ""
-    - - disabled
-      - fg:#858585 italic
-```
 
 ## Version providers
 

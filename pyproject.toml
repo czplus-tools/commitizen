@@ -136,6 +136,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.pytest.ini_options]
 addopts = "--strict-markers"
+markers = ["czplus"]
 
 [tool.ruff]
 line-length = 88
