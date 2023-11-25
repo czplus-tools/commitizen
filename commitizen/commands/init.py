@@ -81,12 +81,12 @@ class Init:
             out.line(f"Config file {self.config.path} already exists")
             return
 
-        out.info("Welcome to commitizen!\n")
+        out.info("Welcome to commitizen-plus!\n")
         out.line(
             "Answer the questions to configure your project.\n"
             "For further configuration visit:\n"
             "\n"
-            "https://commitizen-tools.github.io/commitizen/config/"
+            "https://czplus-tools.github.io/commitizen-plus/config/"
             "\n"
         )
 
@@ -312,7 +312,7 @@ class Init:
     def _install_pre_commit_hook(self, hook_types: list[str] | None = None):
         pre_commit_config_filename = ".pre-commit-config.yaml"
         cz_hook_config = {
-            "repo": "https://github.com/commitizen-tools/commitizen",
+            "repo": "https://github.com/czplus-tools/commitizen-plus",
             "rev": f"v{__version__}",
             "hooks": [
                 {"id": "commitizen"},

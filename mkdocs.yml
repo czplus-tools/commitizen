@@ -25,8 +25,8 @@ theme:
         icon: material/brightness-4
         name: Switch to system preference
 
-repo_name: commitizen-tools/commitizen
-repo_url: https://github.com/commitizen-tools/commitizen
+repo_name: czplus-tools/commitizen-plus
+repo_url: https://github.com/czplus-tools/commitizen-plus
 edit_uri: ""
 
 nav:

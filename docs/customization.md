@@ -164,7 +164,7 @@ commitizen:
 | `change_type_map`   | `dict` | `None`  | (OPTIONAL) Dictionary mapping the type of the commit to a changelog entry                                                                                                                                                        |
 
 [jinja2]: https://jinja.palletsprojects.com/en/2.10.x/
-[changelog-spec]: https://commitizen-tools.github.io/commitizen/changelog/
+[changelog-spec]: https://czplus-tools.github.io/commitizen-plus/changelog/
 
 #### Detailed `questions` content
 
@@ -197,6 +197,7 @@ Check an [example](convcomms) on how to configure `BaseCommitizen`.
 
 You can also automate the steps above through [cookiecutter](https://cookiecutter.readthedocs.io/en/1.7.0/).
 
+# TODO
 ```sh
 cookiecutter gh:commitizen-tools/commitizen_cz_template
 ```

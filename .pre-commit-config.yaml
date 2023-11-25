@@ -45,7 +45,7 @@ repos:
         args: [ "--write-changes", "--ignore-words-list", "asend" ]
         exclude: "poetry.lock"
 
-  - repo: https://github.com/commitizen-tools/commitizen
+  - repo: https://github.com/czplus-tools/commitizen-plus
     rev: v0.1.0 # automatically updated by Commitizen
     hooks:
       - id: commitizen

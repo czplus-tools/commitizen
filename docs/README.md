@@ -1,4 +1,4 @@
-[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/commitizen-tools/commitizen/pythonpackage.yml?label=python%20package&logo=github&logoColor=white&style=flat-square)](https://github.com/commitizen-tools/commitizen/actions)
+[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/commitizen-tools/commitizen/pythonpackage.yml?label=python%20package&logo=github&logoColor=white&style=flat-square)](https://github.com/commitizen-tools/commitizen/actions) # TODO: Update badges
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg?style=flat-square)](https://conventionalcommits.org)
 [![PyPI Package latest release](https://img.shields.io/pypi/v/commitizen.svg?style=flat-square)](https://pypi.org/project/commitizen/)
 [![PyPI Package download count (per month)](https://img.shields.io/pypi/dm/commitizen?style=flat-square)](https://pypi.org/project/commitizen/)
@@ -11,7 +11,7 @@
 
 ---
 
-**Documentation:** [https://commitizen-tools.github.io/commitizen/](https://commitizen-tools.github.io/commitizen/)
+**Documentation:** [https://czplus-tools.github.io/commitizen-plus/](https://czplus-tools.github.io/commitizen-plus/)
 
 ---
 
@@ -85,13 +85,13 @@ brew install commitizen
 Most of the time this is the only command you'll run:
 
 ```sh
-cz bump
+czp bump
 ```
 
 On top of that, you can use commitizen to assist you with the creation of commits:
 
 ```sh
-cz commit
+czp commit
 ```
 
 Read more in the section [Getting Started](./getting_started.md).
@@ -99,8 +99,8 @@ Read more in the section [Getting Started](./getting_started.md).
 ### Help
 
 ```sh
-$ cz --help
-usage: cz [-h] [--debug] [-n NAME] [-nr NO_RAISE] {init,commit,c,ls,example,info,schema,bump,changelog,ch,check,version} ...
+$ czp --help
+usage: czp [-h] [--debug] [-n NAME] [-nr NO_RAISE] {init,commit,c,ls,example,info,schema,bump,changelog,ch,check,version} ...
 
 Commitizen is a cli tool to generate conventional commits.
 For more information about the topic go to https://conventionalcommits.org/
@@ -110,7 +110,7 @@ optional arguments:
   --debug               use debug mode
   -n NAME, --name NAME  use the given commitizen (default: cz_conventional_commits)
   -nr NO_RAISE, --no-raise NO_RAISE
-                        comma separated error codes that won't rise error, e.g: cz -nr 1,2,3 bump. See codes at https://commitizen-
+                        comma separated error codes that won't rise error, e.g: czp -nr 1,2,3 bump. See codes at https://commitizen-
                         tools.github.io/commitizen/exit_codes/
 
 commands:
@@ -119,7 +119,7 @@ commands:
     commit (c)          create new commit
     ls                  show available commitizens
     example             show commit example
-    info                show information about the cz
+    info                show information about the czp
     schema              show commit schema
     bump                bump semantic version based on the git log
     changelog (ch)      generate changelog (note that it will overwrite existing file)
@@ -142,13 +142,13 @@ sudo activate-global-python-argcomplete
 For permanent (but not global) Commitizen activation, use:
 
 ```bash
-register-python-argcomplete cz >> ~/.bashrc
+register-python-argcomplete czp >> ~/.bashrc
 ```
 
 For one-time activation of argcomplete for Commitizen only, use:
 
 ```bash
-eval "$(register-python-argcomplete cz)"
+eval "$(register-python-argcomplete czp)"
 ```
 
 For further information on activation, please visit the [argcomplete website](https://kislyuk.github.io/argcomplete/).
