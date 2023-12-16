@@ -82,13 +82,19 @@ class GitTag(GitObject):
         return cls(name=name, rev=obj, date=date)
 
 
-def tag(tag: str, annotated: bool = False, signed: bool = False) -> cmd.Command:
+def tag(
+    tag: str, annotated: bool = False, signed: bool = False, msg: str | None = None
+) -> cmd.Command:
     _opt = ""
     if annotated:
         _opt = f"-a {tag} -m"
     if signed:
         _opt = f"-s {tag} -m"
-    c = cmd.run(f"git tag {_opt} {tag}")
+
+    # according to https://git-scm.com/book/en/v2/Git-Basics-Tagging,
+    # we're not able to create lightweight tag with message.
+    # by adding message, we make it a annotated tags
+    c = cmd.run(f'git tag {_opt} "{tag if _opt == "" or msg is None else msg}"')
     return c
 
 
@@ -195,6 +201,13 @@ def is_signed_tag(tag: str) -> bool:
 
 def get_latest_tag_name() -> str | None:
     c = cmd.run("git describe --abbrev=0 --tags")
+    if c.err:
+        return None
+    return c.out.strip()
+
+
+def get_tag_message(tag: str) -> str | None:
+    c = cmd.run(f"git tag -l --format='%(contents:subject)' {tag}")
     if c.err:
         return None
     return c.out.strip()

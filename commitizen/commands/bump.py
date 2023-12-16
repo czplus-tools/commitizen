@@ -50,6 +50,7 @@ class Bump:
                     "bump_message",
                     "gpg_sign",
                     "annotated_tag",
+                    "annotated_tag_message",
                     "major_version_zero",
                     "prerelease_offset",
                     "template",
@@ -197,8 +198,7 @@ class Bump:
 
         # If user specified changelog_to_stdout, they probably want the
         # changelog to be generated as well, this is the most intuitive solution
-        if not self.changelog and self.changelog_to_stdout:
-            self.changelog = True
+        self.changelog = self.changelog or bool(self.changelog_to_stdout)
 
         # No commits, there is no need to create an empty tag.
         # Unless we previously had a prerelease.
@@ -365,7 +365,10 @@ class Bump:
             signed=self.bump_settings.get("gpg_sign", False)
             or bool(self.config.settings.get("gpg_sign", False)),
             annotated=self.bump_settings.get("annotated_tag", False)
-            or bool(self.config.settings.get("annotated_tag", False)),
+            or bool(self.config.settings.get("annotated_tag", False))
+            or bool(self.bump_settings.get("annotated_tag_message", False)),
+            msg=self.bump_settings.get("annotated_tag_message", None),
+            # TODO: also get from self.config.settings?
         )
         if c.return_code != 0:
             raise BumpTagFailedError(c.err)
