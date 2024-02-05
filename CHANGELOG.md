@@ -1,4 +1,17 @@
 
+## v3.14.1 (2024-02-04)
+
+### Fix
+
+- **bump**: remove unused method
+- **scm**: only search tags that are reachable by the current commit
+
+## v3.14.0 (2024-02-01)
+
+### Feat
+
+- properly bump versions between prereleases (#799)
+
 ## v3.13.0 (2023-12-03)
 
 ### Feat
@@ -29,8 +42,6 @@
 ### Fix
 
 - **filename**: ensure `file_name` can be passed to `changelog` from `bump` command
-
-## 3.11.0 (2023-10-17)
 
 ## v3.11.0 (2023-10-17)
 
@@ -64,8 +75,6 @@
 
 - **conf**: handle parse error when init (#856)
 
-## 3.9.0 (2023-09-15)
-
 ## v3.9.0 (2023-09-15)
 
 ### Feat
@@ -98,8 +107,6 @@
 ### Feat
 
 - **defaults.py**: add always_signoff config option for commits
-
-## 3.7.1 (2023-09-04)
 
 ## v3.7.1 (2023-09-04)
 

@@ -24,7 +24,10 @@ from commitizen.exceptions import (
 )
 from commitizen.changelog_formats import get_changelog_format
 from commitizen.providers import get_provider
-from commitizen.version_schemes import InvalidVersion, get_version_scheme
+from commitizen.version_schemes import (
+    get_version_scheme,
+    InvalidVersion,
+)
 
 logger = getLogger("commitizen")
 
@@ -225,11 +228,6 @@ class Bump:
                     "No commits found to generate a pre-release.\n"
                     "To avoid this error, manually specify the type of increment with `--increment`"
                 )
-
-            # Increment is removed when current and next version
-            # are expected to be prereleases.
-            if prerelease and current_version.is_prerelease:
-                increment = None
 
             new_version = current_version.bump(
                 increment,

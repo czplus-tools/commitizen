@@ -1,4 +1,5 @@
 import itertools
+import random
 
 import pytest
 
@@ -44,10 +45,11 @@ local_versions = [
     (("4.5.0+0.2.0", "MAJOR", None, 0, None), "4.5.0+1.0.0"),
 ]
 
-# this cases should be handled gracefully
-unexpected_cases = [
-    (("0.1.1rc0", None, "alpha", 0, None), "0.1.1-a0"),
-    (("0.1.1b1", None, "alpha", 0, None), "0.1.1-a0"),
+# never bump backwards on pre-releases
+linear_prerelease_cases = [
+    (("0.1.1b1", None, "alpha", 0, None), "0.1.1-b2"),
+    (("0.1.1rc0", None, "alpha", 0, None), "0.1.1-rc1"),
+    (("0.1.1rc0", None, "beta", 0, None), "0.1.1-rc1"),
 ]
 
 weird_cases = [
@@ -84,7 +86,7 @@ tdd_cases = [
 
 @pytest.mark.parametrize(
     "test_input, expected",
-    itertools.chain(tdd_cases, weird_cases, simple_flow, unexpected_cases),
+    itertools.chain(tdd_cases, weird_cases, simple_flow, linear_prerelease_cases),
 )
 def test_bump_semver_version(test_input, expected):
     current_version = test_input[0]
@@ -134,3 +136,76 @@ def test_semver_scheme_property():
 
 def test_semver_implement_version_protocol():
     assert isinstance(SemVer("0.0.1"), VersionProtocol)
+
+
+def test_semver_sortable():
+    test_input = [x[0][0] for x in simple_flow]
+    test_input.extend([x[1] for x in simple_flow])
+    # randomize
+    random_input = [SemVer(x) for x in random.sample(test_input, len(test_input))]
+    assert len(random_input) == len(test_input)
+    sorted_result = [str(x) for x in sorted(random_input)]
+    assert sorted_result == [
+        "0.1.0",
+        "0.1.0",
+        "0.1.1-dev1",
+        "0.1.1",
+        "0.1.1",
+        "0.2.0",
+        "0.2.0",
+        "0.2.0",
+        "0.3.0-dev1",
+        "0.3.0",
+        "0.3.0",
+        "0.3.0",
+        "0.3.0",
+        "0.3.1-a0",
+        "0.3.1-a0",
+        "0.3.1-a0",
+        "0.3.1-a0",
+        "0.3.1-a1",
+        "0.3.1-a1",
+        "0.3.1-a1",
+        "0.3.1",
+        "0.3.1",
+        "0.3.1",
+        "0.3.2",
+        "0.4.2",
+        "1.0.0-a0",
+        "1.0.0-a0",
+        "1.0.0-a1",
+        "1.0.0-a1",
+        "1.0.0-a1",
+        "1.0.0-a1",
+        "1.0.0-a2-dev0",
+        "1.0.0-a2-dev0",
+        "1.0.0-a2-dev1",
+        "1.0.0-a2",
+        "1.0.0-a3-dev0",
+        "1.0.0-a3-dev0",
+        "1.0.0-a3-dev1",
+        "1.0.0-b0",
+        "1.0.0-b0",
+        "1.0.0-b0",
+        "1.0.0-b1",
+        "1.0.0-b1",
+        "1.0.0-rc0",
+        "1.0.0-rc0",
+        "1.0.0-rc0",
+        "1.0.0-rc0",
+        "1.0.0-rc1-dev1",
+        "1.0.0-rc1",
+        "1.0.0",
+        "1.0.0",
+        "1.0.1",
+        "1.0.1",
+        "1.0.2",
+        "1.0.2",
+        "1.1.0",
+        "1.1.0",
+        "1.2.0",
+        "1.2.0",
+        "1.2.1",
+        "1.2.1",
+        "2.0.0",
+    ]
