@@ -26,7 +26,7 @@ class FakeQuestion:
 
 pre_commit_config_filename = ".pre-commit-config.yaml"
 cz_hook_config = {
-    "repo": "https://github.com/commitizen-tools/commitizen",
+    "repo": "https://github.com/czplus-tools/commitizen-plus",
     "rev": f"v{__version__}",
     "hooks": [
         {"id": "commitizen"},
